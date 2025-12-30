@@ -49,8 +49,6 @@ jobs:
           host: ${{ secrets.CLOUDFLARE_SSH_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          proxy_command: cloudflared access ssh --hostname %h
           script: |
             cd /caminho/do/seu/compose
             docker compose pull
