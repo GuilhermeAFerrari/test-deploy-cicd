@@ -35,10 +35,10 @@ jobs:
     needs: build
 
     steps:
-      - name: Deploy to VPS via SSH (Cloudflare Tunnel)
+      - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v0.1.7
         with:
-          host: ${{ secrets.CLOUDFLARE_SSH_HOST }}
+          host: 158.220.96.93
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
