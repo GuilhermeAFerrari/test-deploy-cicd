@@ -1,0 +1,44 @@
+.indicators-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.indicator-card {
+  flex: 1;
+  min-width: 250px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  color: #26272c;
+  transition: transform 0.2s;
+}
+
+.indicator-card:hover {
+    transform: translateY(-5px);
+}
+
+.indicator-card h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #2b556d;
+}
+
+.indicator-card p {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 10px 0 0 0;
+}
+
+.welcome-message {
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .indicators-container {
+    flex-direction: column;
+  }
+}

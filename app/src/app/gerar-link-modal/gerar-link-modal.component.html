@@ -1,0 +1,11 @@
+<div class="modal-overlay" (click)="fechar()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="fechar()">&times;</button>
+    <h2>Link de pontos gerado</h2>
+    <p>Compartilhe este link com o seu cliente.</p>
+    <div class="link-container">
+      <input type="text" [value]="link" readonly #linkInput>
+      <button (click)="copiarLink()" class="copy-btn">{{ copyButtonText }}</button>
+    </div>
+  </div>
+</div>

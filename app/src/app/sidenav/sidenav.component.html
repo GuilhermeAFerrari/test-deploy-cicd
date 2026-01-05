@@ -1,0 +1,23 @@
+@if (isSidenavOpen()) {
+  <div class="sidenav-overlay" (click)="closeSidenav()"></div>
+}
+<div class="sidenav" [class.open]="isSidenavOpen()">
+  <div class="logo">
+    <h2>Viva pontos</h2>
+    <button class="close-btn" (click)="closeSidenav()">&times;</button>
+  </div>
+  <ul class="nav-list">
+    <li><a routerLink="/dashboard/home" routerLinkActive="active" (click)="closeSidenav()">Dashboard</a></li>
+    <li><a routerLink="/dashboard/clientes" routerLinkActive="active" (click)="closeSidenav()">Clientes</a></li>
+    <li><a routerLink="/dashboard/relatorios" routerLinkActive="active" (click)="closeSidenav()">Relatórios</a></li>
+    <li><a routerLink="/dashboard/pagamentos" routerLinkActive="active" (click)="closeSidenav()">Pagamentos</a></li>
+    <li><a (click)="abrirGerarLinkModal()">Gerar Link</a></li>
+  </ul>
+  <div class="logout-section">
+    <button (click)="logout()">Sair</button>
+  </div>
+</div>
+
+@if(isGerarLinkModalOpen) {
+  <app-gerar-link-modal [link]="generatedLink" (close)="isGerarLinkModalOpen = false"></app-gerar-link-modal>
+}
