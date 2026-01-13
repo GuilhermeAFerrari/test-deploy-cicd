@@ -1,8 +1,11 @@
 export interface Cliente {
-  id: number;
-  nome: string;
+  id: string;
+  name: string;
+  dateOfBirth: string;
   email: string;
-  telefone: string;
-  pontos: number;
-  dataCadastro: string;
+  mobileNumber: string;
+  document: string;
+  totalPoints: number;
+  createdAt: string;
 }
+

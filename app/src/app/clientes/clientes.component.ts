@@ -1,29 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Cliente } from '../models/cliente.model';
 import { ModalComponent } from '../modal/modal.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-clientes',
   standalone: true,
-  imports: [CommonModule, ModalComponent],
+  imports: [CommonModule, FormsModule, ModalComponent],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent {
-  clientes: Cliente[] = [
-    { id: 1, nome: 'João da Silva', email: 'joao.silva@email.com', telefone: '(11) 98765-4321', pontos: 1250, dataCadastro: '2023-01-15' },
-    { id: 2, nome: 'Maria Oliveira', email: 'maria.o@email.com', telefone: '(21) 91234-5678', pontos: 850, dataCadastro: '2023-02-20' },
-    { id: 3, nome: 'Carlos Pereira', email: 'carlos.p@email.com', telefone: '(31) 95555-4444', pontos: 2300, dataCadastro: '2023-03-10' },
-    { id: 4, nome: 'Ana Souza', email: 'ana.souza@email.com', telefone: '(41) 98888-7777', pontos: 500, dataCadastro: '2023-04-05' },
-    { id: 5, nome: 'Rafael Lima', email: 'rafa.lima@email.com', telefone: '(51) 97777-6666', pontos: 4100, dataCadastro: '2022-11-28' },
-    { id: 6, nome: 'Beatriz Costa', email: 'bia.costa@email.com', telefone: '(61) 96666-5555', pontos: 150, dataCadastro: '2023-05-18' },
-  ];
-
+export class ClientesComponent implements OnInit {
+  clientes: Cliente[] = [];
+  clientesFiltrados: Cliente[] = [];
+  filtroNome = '';
   selectedCliente: Cliente | null = null;
+  http = inject(HttpClient);
+
+  ngOnInit(): void {
+    this.http.get<Cliente[]>('http://localhost:8080/customers').subscribe(data => {
+      this.clientes = data;
+      this.clientesFiltrados = data;
+    });
+  }
+
+  filtrarClientes(): void {
+    if (!this.filtroNome) {
+      this.clientesFiltrados = this.clientes;
+      return;
+    }
+    this.clientesFiltrados = this.clientes.filter(cliente =>
+      cliente.name.toLowerCase().includes(this.filtroNome.toLowerCase())
+    );
+  }
 
   selecionarCliente(cliente: Cliente): void {
-    this.selectedCliente = cliente;
+    this.http.get<Cliente>(`http://localhost:8080/customers?documento=${cliente.document}`).subscribe(data => {
+      this.selectedCliente = data;
+    });
   }
 
   fecharModal(): void {

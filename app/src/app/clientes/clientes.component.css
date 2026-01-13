@@ -5,14 +5,38 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
-.table-container h2 {
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header-section h2 {
     margin-top: 0;
+    margin-bottom: 5px;
     color: #26272c;
 }
 
-.table-container p {
+.header-section p {
     color: #6c757d;
-    margin-bottom: 20px;
+    margin: 0;
+}
+
+.filter-container input {
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  min-width: 250px;
+  font-size: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
 }
 
 /* --- Desktop Table Styles --- */
@@ -60,6 +84,15 @@ tbody tr:hover {
 }
 
 @media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-container input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
   .desktop-view {
     display: none;
   }
